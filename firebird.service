@@ -1,0 +1,16 @@
+[Unit]
+Description=Firebird Database Service
+After=syslog.target network.target
+
+[Service]
+User=firebird
+Group=firebird
+Type=forking
+RuntimeDirectory=firebird
+PIDFile=/run/firebird/default.pid
+Environment=FIREBIRD_TMP=/run/firebird
+ExecStart=/usr/lib/firebird/bin/fbguard -pidfile /run/firebird/default.pid -daemon -forever
+SyslogIdentifier=firebird
+
+[Install]
+WantedBy=multi-user.target
