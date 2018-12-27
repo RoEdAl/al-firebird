@@ -23,15 +23,19 @@ backup=(
 source=("https://github.com/FirebirdSQL/firebird/releases/download/R${_pkgver//./_}/Firebird-${pkgver}-0.tar.bz2"
         'firebird-tmpfiles.conf'
         'firebird-sysusers.conf'
-	'firebird.service')
+	'firebird.service'
+	'0001-ARM-build-tweaks.patch')
 
 md5sums=('43569120299b2db7587dcfbddab1e25a'
          'd3f0c0ca2c69ec0d22e64cadd61730e6'
          'e73bcb4f6a99d80fd8a1f5b31b020159'
-         'a9b28dfe3a177350ba78acea2ab31a27')
+         'a9b28dfe3a177350ba78acea2ab31a27'
+         'ec02081dd6b30070e0682d8aa22e461d')
 
 prepare() {
   cd $srcdir/Firebird-$pkgver-0
+
+  git apply ../0001-ARM-build-tweaks.patch
 
   ./autogen.sh \
     --prefix=/usr \
