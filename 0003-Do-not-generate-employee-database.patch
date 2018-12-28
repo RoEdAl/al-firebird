@@ -1,0 +1,23 @@
+From e68eb6e91130e75bbfa37df8a45c6548552bc696 Mon Sep 17 00:00:00 2001
+From: Edmunt Pienkowsky <roed@onet.eu>
+Date: Fri, 28 Dec 2018 21:46:33 +0000
+Subject: [PATCH 3/4] Do not generate employee database
+
+Signed-off-by: Edmunt Pienkowsky <roed@onet.eu>
+
+diff --git a/builds/posix/Makefile.in.examples b/builds/posix/Makefile.in.examples
+index bf21355c74..01af635592 100644
+--- a/builds/posix/Makefile.in.examples
++++ b/builds/posix/Makefile.in.examples
+@@ -87,7 +87,7 @@ INTLEMP_DB=	$(EXAMPLES_DEST)/intlemp.fdb
+ all: examples
+ 
+ # examples: $(EMPLOYEE_DB) $(INTLEMP_DB) $(FIREBIRD)/examples/README
+-examples:	$(FINAL_EMPDB) $(FIREBIRD)/examples/README
++examples: $(FIREBIRD)/examples/README
+ 
+ $(FINAL_EMPDB):	$(EMPLOYEE_DB)
+ 	$(RM) $(FINAL_EMPDB)
+-- 
+2.20.1
+

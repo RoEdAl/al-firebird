@@ -1,0 +1,59 @@
+From c6092c85d9f40beb9a6320a3443f24b3f339e1e5 Mon Sep 17 00:00:00 2001
+From: Edmunt Pienkowsky <roed@onet.eu>
+Date: Fri, 28 Dec 2018 21:47:06 +0000
+Subject: [PATCH 4/4] Configuration tweaks
+
+Signed-off-by: Edmunt Pienkowsky <roed@onet.eu>
+
+diff --git a/builds/install/misc/databases.conf.in b/builds/install/misc/databases.conf.in
+index 8292777bbd..e4999d934f 100644
+--- a/builds/install/misc/databases.conf.in
++++ b/builds/install/misc/databases.conf.in
+@@ -15,19 +15,11 @@
+ #
+ 
+ #
+-# Example Database:
++# Your first database:
+ #
+-employee.fdb = $(dir_sampleDb)/employee.fdb
+-employee = $(dir_sampleDb)/employee.fdb
+-
+-#
+-# Master security database specific setup.
+-# Do not remove it until you understand well what are you doing!
+-#
+-security.db = $(dir_secDb)/security3.fdb
++my-first = /var/lib/firebird/my-first.fdb
+ {
+-	RemoteAccess = false
+-	DefaultDbCachePages = 50
++	SecurityDatabase = my-real-database.db
+ }
+ 
+ #
+diff --git a/builds/install/misc/firebird.conf.in b/builds/install/misc/firebird.conf.in
+index 803103d549..c048a6d9a4 100644
+--- a/builds/install/misc/firebird.conf.in
++++ b/builds/install/misc/firebird.conf.in
+@@ -123,7 +123,7 @@
+ #
+ # Type: string (special format)
+ #
+-#DatabaseAccess = Full
++DatabaseAccess = None
+ 
+ 
+ # ----------------------------
+@@ -189,7 +189,7 @@
+ #
+ # Type: string (special format)
+ #
+-#UdfAccess = Restrict UDF
++UdfAccess = None
+ 
+ 
+ # ----------------------------
+-- 
+2.20.1
+
