@@ -24,18 +24,21 @@ source=("https://github.com/FirebirdSQL/firebird/releases/download/R${_pkgver//.
         'firebird-tmpfiles.conf'
         'firebird-sysusers.conf'
 	'firebird.service'
-	'0001-ARM-build-tweaks.patch')
+	'0001-ARM-build-tweaks.patch'
+	'0002-Intel-build-tweaks.patch')
 
 md5sums=('43569120299b2db7587dcfbddab1e25a'
          'd3f0c0ca2c69ec0d22e64cadd61730e6'
          'e73bcb4f6a99d80fd8a1f5b31b020159'
          'a9b28dfe3a177350ba78acea2ab31a27'
-         'ec02081dd6b30070e0682d8aa22e461d')
+         '3b80a74f477b0705be278dd640a194b5'
+         'e5d4b9b69cdc031c22f1a56bb2b8ca29')
 
 prepare() {
   cd $srcdir/Firebird-$pkgver-0
 
   git apply ../0001-ARM-build-tweaks.patch
+  git apply ../0002-Intel-build-tweaks.patch
 
   ./autogen.sh \
     --prefix=/usr \
