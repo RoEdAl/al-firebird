@@ -6,7 +6,7 @@ _pkgver=3.0.4
 pkgver=$_pkgver.33054
 pkgrel=1
 pkgdesc="A open source SQL relational database management system (RDMS)"
-arch=('i686' 'x86_64' 'armv7h')
+arch=('i686' 'x86_64' 'armv7h' 'aarch64')
 url="http://www.firebirdsql.org/"
 license=('custom:IPL' 'custom:IDPL')
 depends=('icu' 'libedit' 'libtommath' 'libatomic_ops')
@@ -48,7 +48,7 @@ source=("https://github.com/FirebirdSQL/firebird/releases/download/R${_pkgver//.
 md5sums=('43569120299b2db7587dcfbddab1e25a'
          'd3f0c0ca2c69ec0d22e64cadd61730e6'
          'e73bcb4f6a99d80fd8a1f5b31b020159'
-         '0a44158753843adfe41070fe418497dd'
+         'bc5a21ff900ad7dd158b84595e5dba45'
          '3e5b2500a6417ef4c9bc548ba5d92c2f'
          '805a17e4cd63d72550ad2b69b7013b3f'
          '30f5425407e2c0f3b37fcee6939526b4'
@@ -61,6 +61,8 @@ md5sums=('43569120299b2db7587dcfbddab1e25a'
 
 prepare() {
   cd $srcdir/Firebird-$pkgver-0
+
+  rm builds/make.new/config/*
 
   for p in ${_patches[@]}; do
     msg2 "Applying ${p}"
@@ -93,7 +95,6 @@ prepare() {
     --without-fbsecure-db \
     --with-system-editline \
     --with-pipe-name=firebird
-
 }
 
 build() {
