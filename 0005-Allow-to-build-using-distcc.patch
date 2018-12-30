@@ -1,0 +1,38 @@
+From 18636b53d7c834e48268c1d74111f09260a65a21 Mon Sep 17 00:00:00 2001
+From: Edmunt Pienkowsky <roed@onet.eu>
+Date: Sun, 30 Dec 2018 16:06:50 +0000
+Subject: [PATCH 5/5] Allow to build using distcc
+
+Signed-off-by: Edmunt Pienkowsky <roed@onet.eu>
+
+diff --git a/builds/posix/make.rules b/builds/posix/make.rules
+index 2eb8f3833f..0e8c8efeb6 100644
+--- a/builds/posix/make.rules
++++ b/builds/posix/make.rules
+@@ -91,19 +91,19 @@ $(OBJ)/%.cpp: $(SRC_ROOT)/%.epp
+ 	$(CC) $(WCFLAGS) -c $(firstword $<) -o $@
+ 
+ $(OBJ)/%.o: $(SRC_ROOT)/%.c
+-	$(CC) $(WCFLAGS) -c $(firstword $<) -o $@
++	$(CC) $(WCFLAGS) -MF $(@:.o=.d) -c $(firstword $<) -o $@
+ 	@sed $(INLINE_EDIT_SED) -e "1,2s/:/: \$$(wildcard/" -e "\$$s/\(.*\)/\\1)/" $(patsubst %.o,%.d,$@)
+ 
+ $(OBJ)/%.o: $(OBJ)/%.cpp
+-	$(CXX) $(WCXXFLAGS) -c $(firstword $<) -o $@
++	$(CXX) $(WCXXFLAGS) -MF $(@:.o=.d) -c $(firstword $<) -o $@
+ 	@sed $(INLINE_EDIT_SED) -e "1,2s/:/: \$$(wildcard/" -e "\$$s/\(.*\)/\\1)/" $(patsubst %.o,%.d,$@)
+ 
+ $(OBJ)/%.o: $(SRC_ROOT)/%.cpp
+-	$(CXX) $(WCXXFLAGS) -c $(firstword $<) -o $@
++	$(CXX) $(WCXXFLAGS) -MF $(@:.o=.d) -c $(firstword $<) -o $@
+ 	@sed $(INLINE_EDIT_SED) -e "1,2s/:/: \$$(wildcard/" -e "\$$s/\(.*\)/\\1)/" $(patsubst %.o,%.d,$@)
+ 
+ $(OBJ)/%.o: $(ROOT)/%.cpp
+-	$(CC) $(WCFLAGS) -c $(firstword $<) -o $@
++	$(CC) $(WCFLAGS) -MF $(@:.o=.d) -c $(firstword $<) -o $@
+ 	@sed $(INLINE_EDIT_SED) -e "1,2s/:/: \$$(wildcard/" -e "\$$s/\(.*\)/\\1)/" $(patsubst %.o,%.d,$@)
+ 
+ .SUFFIXES: .epp .e
+-- 
+2.20.1
+

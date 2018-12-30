@@ -23,9 +23,10 @@ backup=(
 
 _patches=(
 	'0001-ARM-build-tweaks.patch'
-        '0002-Intel-build-tweaks.patch'
-        '0003-Do-not-generate-employee-database.patch'
+	'0002-Intel-build-tweaks.patch'
+	'0003-Do-not-generate-employee-database.patch'
 	'0004-Configuration-tweaks.patch'
+	'0005-Allow-to-build-using-distcc.patch'
 )
 
 _debian_patches_url='http://salsa.debian.org/firebird-team/firebird3.0/raw/master/debian/patches/'
@@ -49,10 +50,11 @@ md5sums=('43569120299b2db7587dcfbddab1e25a'
          'd3f0c0ca2c69ec0d22e64cadd61730e6'
          'e73bcb4f6a99d80fd8a1f5b31b020159'
          'bc5a21ff900ad7dd158b84595e5dba45'
-         '3e5b2500a6417ef4c9bc548ba5d92c2f'
-         '805a17e4cd63d72550ad2b69b7013b3f'
-         '30f5425407e2c0f3b37fcee6939526b4'
-         'f863a447a9025611a7c39a80bfc2e66f'
+         '31f89653ac9877f863447bee0123ace9'
+         '461da7addc7df55fd19dde5905b9cf0e'
+         'b06331ffb9b8781d117598ac1a00080b'
+         '2c44d7798d3d304381deb2d112947d04'
+         '9cc93842394fb412ba1dcb8964dbb0c7'
          'd672c79af5d2fc86a2c2157a72e555bb'
          '2150ce29d4847a7e7ad53792bf5f2277'
          '416a28bc89ab981b7f4947422438009b'
