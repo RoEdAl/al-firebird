@@ -83,20 +83,19 @@ prepare() {
     --with-fbdoc=/usr/share/doc/firebird \
     --with-fbglock=/run/firebird \
     --with-fbhelp=/usr/share/doc/firebird/help \
-    --with-fbinclude=/usr/include/firebird \
+    --with-fbinclude=/usr/include \
     --with-fblib=/usr/lib \
     --without-fblog \
     --with-fbmsg=/usr/lib/firebird/msg \
     --with-fbplugins=/usr/lib/firebird/plugins \
     --with-fbsbin=/usr/lib/firebird/bin \
-    --with-fbudf=/usr/lib/firebird/UDF \
+    --with-fbudf=/usr/lib/firebird/udf \
     --with-fbintl=/usr/lib/firebird/intl \
     --without-fbmisc \
     --without-fbsample \
     --without-fbsample-db \
     --without-fbsecure-db \
-    --with-system-editline \
-    --with-pipe-name=firebird
+    --with-system-editline
 }
 
 build() {
@@ -123,8 +122,11 @@ package() {
   rm $pkgdir/etc/firebird/I{,D}PLicense.txt
   rm $pkgdir/etc/firebird/README
   rm $pkgdir/etc/firebird/WhatsNew
+  rm $pkgdir/usr/include/perf.h
   rm -rf $pkgdir/var/log
   rm -rf $pkgdir/run
+  rm -rf $pkgdir/usr/include/firebird/impl
+  rm -rf $pkgdir/usr/share/doc/firebird/help
 
   mv $pkgdir/usr/bin/isql{,-fb}
 
