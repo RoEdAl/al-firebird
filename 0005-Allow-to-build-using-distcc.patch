@@ -1,6 +1,6 @@
-From 18636b53d7c834e48268c1d74111f09260a65a21 Mon Sep 17 00:00:00 2001
+From a04f14f4d547c9ca74826ac8b07522a5ca13c277 Mon Sep 17 00:00:00 2001
 From: Edmunt Pienkowsky <roed@onet.eu>
-Date: Sun, 30 Dec 2018 16:06:50 +0000
+Date: Tue, 1 Jan 2019 11:31:39 +0000
 Subject: [PATCH 5/5] Allow to build using distcc
 
 Signed-off-by: Edmunt Pienkowsky <roed@onet.eu>
