@@ -4,7 +4,7 @@
 pkgname=firebird
 _pkgver=3.0.4
 pkgver=$_pkgver.33054
-pkgrel=1
+pkgrel=2
 pkgdesc="A open source SQL relational database management system (RDMS)"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h' 'aarch64')
 url="http://www.firebirdsql.org/"
@@ -27,6 +27,7 @@ _patches=(
 	'0003-Do-not-generate-employee-database.patch'
 	'0004-Configuration-tweaks.patch'
 	'0005-Allow-to-build-using-distcc.patch'
+	'0006-gbak-honor-FE-option-along-with-SE-one.patch'
 )
 
 _debian_patches_url='http://salsa.debian.org/firebird-team/firebird3.0/raw/master/debian/patches/'
@@ -49,12 +50,13 @@ source=("https://github.com/FirebirdSQL/firebird/releases/download/R${_pkgver//.
 md5sums=('43569120299b2db7587dcfbddab1e25a'
          'd3f0c0ca2c69ec0d22e64cadd61730e6'
          'e73bcb4f6a99d80fd8a1f5b31b020159'
-         'bc5a21ff900ad7dd158b84595e5dba45'
-         'bb9e6f6b1439b2ce724cbb6ff84a1430'
-         'd6550dead2678abe0a5f133a166f426b'
-         '48d55c2ec95dc74eeaaa58ab6435aae3'
-         '99fb21ae4335eaba25025ca867033ca2'
-         '805c88d9f8a2a57edbab11e2f4a93918'
+         '293b709ea19dfb629f745496e5e51020'
+         '5edff9e17d12d28fef7affac7daa8706'
+         '9962cc872a890b74d0143886f6cb7ee3'
+         'ac21ccd2c9bf56cc4f1a8f9383ab730c'
+         '2278352167dc3fc10193ecda2dbe03de'
+         '2612dd0f9bbd6865411f44148366ad7e'
+         '1a2846e73411865273830a69a54504c7'
          'd672c79af5d2fc86a2c2157a72e555bb'
          '2150ce29d4847a7e7ad53792bf5f2277'
          '416a28bc89ab981b7f4947422438009b'

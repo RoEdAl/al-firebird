@@ -1,7 +1,7 @@
 From a04f14f4d547c9ca74826ac8b07522a5ca13c277 Mon Sep 17 00:00:00 2001
 From: Edmunt Pienkowsky <roed@onet.eu>
 Date: Tue, 1 Jan 2019 11:31:39 +0000
-Subject: [PATCH 5/5] Allow to build using distcc
+Subject: [PATCH 5/6] Allow to build using distcc
 
 Signed-off-by: Edmunt Pienkowsky <roed@onet.eu>
 

@@ -1,7 +1,7 @@
 From 43a3687becc595d928eceeacc8d9d291473c1ffa Mon Sep 17 00:00:00 2001
 From: Edmunt Pienkowsky <roed@onet.eu>
 Date: Fri, 28 Dec 2018 21:45:47 +0000
-Subject: [PATCH 2/5] Intel build tweaks
+Subject: [PATCH 2/6] Intel build tweaks
 
 Signed-off-by: Edmunt Pienkowsky <roed@onet.eu>
 

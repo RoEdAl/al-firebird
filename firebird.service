@@ -5,12 +5,11 @@ After=network.target
 [Service]
 User=firebird
 Group=firebird
-Type=forking
 RuntimeDirectory=firebird
-PIDFile=/run/firebird/default.pid
 Environment=FIREBIRD_TMP=/run/firebird FIREBIRD_LOCK=/run/firebird
-ExecStart=/usr/lib/firebird/bin/fbguard -pidfile /run/firebird/default.pid -daemon -forever
-SyslogIdentifier=firebird
+ExecStart=/usr/lib/firebird/bin/firebird
+Restart=on-failure
+RestartSec=10
 
 [Install]
 WantedBy=multi-user.target
