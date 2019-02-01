@@ -6,10 +6,13 @@ After=network.target
 User=firebird
 Group=firebird
 RuntimeDirectory=firebird
+RuntimeDirectoryMode=0750
+LogsDirectory=firebird
+LogsDirectoryMode=0750
 Environment=FIREBIRD_TMP=/run/firebird FIREBIRD_LOCK=/run/firebird
 ExecStart=/usr/lib/firebird/bin/firebird
 Restart=on-failure
-RestartSec=10
+RestartSec=5
 
 [Install]
 WantedBy=multi-user.target
