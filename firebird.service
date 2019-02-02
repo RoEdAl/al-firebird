@@ -9,6 +9,8 @@ RuntimeDirectory=firebird
 RuntimeDirectoryMode=0750
 LogsDirectory=firebird
 LogsDirectoryMode=0750
+StateDirectory=firebird firebird/system
+StateDirectoryMode=0770
 Environment=FIREBIRD_TMP=/run/firebird FIREBIRD_LOCK=/run/firebird
 ExecStart=/usr/lib/firebird/bin/firebird
 Restart=on-failure

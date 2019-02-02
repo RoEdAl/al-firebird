@@ -1,4 +1,4 @@
-From bc10c205a3c0e4d4bd98245e01c5853f286fff4b Mon Sep 17 00:00:00 2001
+From b3909d563004e71664dd4dde22c0254c19a341f2 Mon Sep 17 00:00:00 2001
 From: Edmunt Pienkowsky <roed@onet.eu>
 Date: Fri, 28 Dec 2018 21:46:33 +0000
 Subject: [PATCH 3/6] Do not generate employee database

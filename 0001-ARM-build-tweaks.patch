@@ -1,4 +1,4 @@
-From 80d5e70ffd1de3afda324a1f9470709a94692be6 Mon Sep 17 00:00:00 2001
+From bfe5b77da5fcdf94466cc371b18896328df1d57b Mon Sep 17 00:00:00 2001
 From: Edmunt Pienkowsky <roed@onet.eu>
 Date: Fri, 28 Dec 2018 21:44:29 +0000
 Subject: [PATCH 1/6] ARM build tweaks

@@ -1,4 +1,4 @@
-From fbe44de8a415a1aea9ebfa080c92517c57253c9d Mon Sep 17 00:00:00 2001
+From 9eb9036953e2724d5d6248dfc58350d7aff87842 Mon Sep 17 00:00:00 2001
 From: Edmunt Pienkowsky <roed@onet.eu>
 Date: Fri, 25 Jan 2019 10:21:55 +0000
 Subject: [PATCH 6/6] gbak: honor -FE option along with -SE one
