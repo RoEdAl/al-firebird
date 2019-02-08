@@ -4,7 +4,7 @@
 pkgname=firebird
 _pkgver=3.0.4
 pkgver=$_pkgver.33054
-pkgrel=4
+pkgrel=5
 pkgdesc="A open source SQL relational database management system (RDMS)"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h' 'aarch64')
 url="http://www.firebirdsql.org/"
@@ -40,9 +40,11 @@ _debian_patches=(
 )
 
 source=("https://github.com/FirebirdSQL/firebird/releases/download/R${_pkgver//./_}/Firebird-${pkgver}-0.tar.bz2"
-        'firebird-tmpfiles.conf'
-        'firebird-sysusers.conf'
+	'firebird-tmpfiles.conf'
+	'firebird-sysusers.conf'
 	'firebird.service'
+	'firebird-log.socket'
+	'firebird-log.service'
 	${_patches[@]}
 	"${_debian_patches[@]/#/${_debian_patches_url}}"
 )
@@ -51,6 +53,8 @@ md5sums=('43569120299b2db7587dcfbddab1e25a'
          'edb311947e4a51bd49426fcd3eb6b9d1'
          'e73bcb4f6a99d80fd8a1f5b31b020159'
          '34c298d809b9524174ba12d147835d65'
+         'b6568e1b2439230dc59defd8f330c2fe'
+         'c0cddd97004c1af5ce31311b5328d7ec'
          '728e5e8a2bb1f75a3e0f045c7aa0e6c2'
          'e76e3f15857d286880ae089709af2094'
          '5489863db8de5637b798d302e9e32cd9'
@@ -118,6 +122,8 @@ package() {
   install -Dm644 $srcdir/firebird-tmpfiles.conf $pkgdir/usr/lib/tmpfiles.d/firebird.conf
   install -Dm644 $srcdir/firebird-sysusers.conf $pkgdir/usr/lib/sysusers.d/firebird.conf
   install -Dm644 $srcdir/firebird.service $pkgdir/usr/lib/systemd/system/firebird.service
+  install -Dm644 $srcdir/firebird-log.socket $pkgdir/usr/lib/systemd/system/firebird-log.socket
+  install -Dm644 $srcdir/firebird-log.service $pkgdir/usr/lib/systemd/system/firebird-log.service
   install -Dm644 $pkgdir/etc/firebird/I{,D}PLicense.txt -t $pkgdir/usr/share/licenses/${pkgname}
 
   # Remove unused files and dirs

@@ -1,0 +1,24 @@
+[Unit]
+Description=Firebird RDMS log dumper
+RefuseManualStart=on
+RefuseManualStop=on
+Requisite=firebird-log.socket
+PartOf=firebird-log.socket
+After=firebird-log.socket
+
+[Service]
+StandardInput=socket
+StandardOutput=null
+StandardError=journal
+ExecStart=/usr/bin/logger -et firebird -p daemon.notice
+User=firebird
+Group=firebird
+ProtectSystem=full
+ProtectHome=on
+RestrictAddressFamilies=AF_UNIX
+ProtectKernelModules=on
+ProtectControlGroups=on
+NoNewPrivileges=on
+CPUSchedulingPolicy=idle
+Nice=15
+TasksMax=4
