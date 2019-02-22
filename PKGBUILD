@@ -4,7 +4,7 @@
 pkgname=firebird
 _pkgver=3.0.4
 pkgver=$_pkgver.33054
-pkgrel=5
+pkgrel=6
 pkgdesc="A open source SQL relational database management system (RDMS)"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h' 'aarch64')
 url="http://www.firebirdsql.org/"
@@ -28,6 +28,7 @@ _patches=(
 	'0004-Configuration-tweaks.patch'
 	'0005-Allow-to-build-using-distcc.patch'
 	'0006-gbak-honor-FE-option-along-with-SE-one.patch'
+	'0007-Use-gcc-visibility-attributes.patch'
 )
 
 _debian_patches_url='http://salsa.debian.org/firebird-team/firebird3.0/raw/master/debian/patches/'
@@ -55,12 +56,13 @@ md5sums=('43569120299b2db7587dcfbddab1e25a'
          '34c298d809b9524174ba12d147835d65'
          'b6568e1b2439230dc59defd8f330c2fe'
          'c0cddd97004c1af5ce31311b5328d7ec'
-         '728e5e8a2bb1f75a3e0f045c7aa0e6c2'
-         'e76e3f15857d286880ae089709af2094'
-         '5489863db8de5637b798d302e9e32cd9'
-         '6686c686fb409ea19a7b4d5322457e3d'
-         'dc7124029c9ab3078b45c30af2f086fc'
-         'e028bfdfbc29eb29964597ee3498a1df'
+         '09b85084a4bf8b0e44cccb5d38f1d099'
+         '64b9b68f27dd1a73952625f52f5aca0c'
+         'd58417c4324b0f1cc04e643a3e1a2987'
+         '839b326125e004dd2f755915b567ffab'
+         '4621482eb384e4e62a5f5a5f98dc7d27'
+         'd33351312728fca890f5e66d21ba1fff'
+         'd244630e9b8c93dcafafb759ac9314a3'
          'd672c79af5d2fc86a2c2157a72e555bb'
          '2150ce29d4847a7e7ad53792bf5f2277'
          '416a28bc89ab981b7f4947422438009b'
@@ -81,6 +83,18 @@ prepare() {
     msg2 "Applying ${p}"
     git apply ../${p}
   done
+}
+
+build() {
+  cd $srcdir/Firebird-$pkgver-0
+
+  local -r EXTRA_CFLAGS=(
+	-ffile-prefix-map=$(pwd)/=/
+	-fvisibility=hidden
+  )
+
+  export CFLAGS="${CFLAGS} ${EXTRA_CFLAGS[@]}"
+  export CXXFLAGS="${CXXFLAGS} ${EXTRA_CFLAGS[@]} -fvisibility-inlines-hidden"
 
   ./autogen.sh \
     --prefix=/usr \
@@ -102,10 +116,6 @@ prepare() {
     --without-fbsample-db \
     --with-fbsecure-db=/var/lib/firebird/system \
     --with-system-editline
-}
-
-build() {
-  cd $srcdir/Firebird-$pkgver-0
 
   make
 }

@@ -1,7 +1,7 @@
-From 3cd2e2a07574bc41036ab3d7909236a9b9754ac6 Mon Sep 17 00:00:00 2001
+From 49ce84716bb82287c835d1f39b477ab9ae20b159 Mon Sep 17 00:00:00 2001
 From: Edmunt Pienkowsky <roed@onet.eu>
 Date: Sat, 2 Feb 2019 09:10:39 +0000
-Subject: [PATCH 4/6] Configuration tweaks
+Subject: [PATCH 4/7] Configuration tweaks
 
 Use more secure options by default.
 

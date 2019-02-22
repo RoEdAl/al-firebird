@@ -1,0 +1,103 @@
+From ef5edea568fcd9bbbb187e03099df0696208da29 Mon Sep 17 00:00:00 2001
+From: Edmunt Pienkowsky <roed@onet.eu>
+Date: Thu, 21 Feb 2019 15:37:36 +0100
+Subject: [PATCH 7/7] Use gcc visibility attributes
+
+Ability to compile sources with -fvisibility=hidden and -fvisibility-inlines-hidden flags.
+
+Signed-off-by: Edmunt Pienkowsky <roed@onet.eu>
+
+diff --git a/src/common/common.h b/src/common/common.h
+index 58abaaf695..3e0b49e121 100644
+--- a/src/common/common.h
++++ b/src/common/common.h
+@@ -199,6 +199,13 @@
+ #define FB_CPU CpuM68k
+ #endif /* M68K */
+ 
++#ifdef __GNUC__
++#define API_ROUTINE __attribute__((visibility("default")))
++#define API_ROUTINE_VARARG API_ROUTINE
++#define INTERNAL_API_ROUTINE API_ROUTINE
++#define FB_EXPORTED __attribute__((visibility("default")))
++#endif
++
+ #endif /* LINUX */
+ 
+ 
+diff --git a/src/include/firebird.h b/src/include/firebird.h
+index 87f0a110f8..b85dd24366 100644
+--- a/src/include/firebird.h
++++ b/src/include/firebird.h
+@@ -47,6 +47,8 @@
+ #define FB_DLL_EXPORT __declspec(dllexport)
+ #elif defined(DARWIN)
+ #define FB_DLL_EXPORT API_ROUTINE
++#elif defined(LINUX) && defined(__GNUC__)
++#define FB_DLL_EXPORT API_ROUTINE
+ #else
+ #define FB_DLL_EXPORT
+ #endif
+diff --git a/src/intl/ld.cpp b/src/intl/ld.cpp
+index cf2e90fbcd..6f013abbc4 100644
+--- a/src/intl/ld.cpp
++++ b/src/intl/ld.cpp
+@@ -468,7 +468,7 @@ struct
+ };
+ 
+ 
+-INTL_BOOL FB_DLL_EXPORT LD_lookup_charset(charset* cs, const ASCII* name, const ASCII* /*config_info*/)
++extern "C" INTL_BOOL FB_DLL_EXPORT LD_lookup_charset(charset* cs, const ASCII* name, const ASCII* /*config_info*/)
+ {
+ 	// ASF: We can't read config_info if version < INTL_VERSION_2,
+ 	// since it wasn't pushed in the stack by the engine.
+@@ -491,7 +491,7 @@ INTL_BOOL FB_DLL_EXPORT LD_lookup_charset(charset* cs, const ASCII* name, const
+ }
+ 
+ 
+-INTL_BOOL FB_DLL_EXPORT LD_lookup_texttype(texttype* tt, const ASCII* texttype_name, const ASCII* charset_name,
++extern "C" INTL_BOOL FB_DLL_EXPORT LD_lookup_texttype(texttype* tt, const ASCII* texttype_name, const ASCII* charset_name,
+ 										   USHORT attributes, const UCHAR* specific_attributes,
+ 										   ULONG specific_attributes_length, INTL_BOOL ignore_attributes,
+ 										   const ASCII* config_info)
+@@ -557,7 +557,7 @@ INTL_BOOL FB_DLL_EXPORT LD_lookup_texttype(texttype* tt, const ASCII* texttype_n
+ }
+ 
+ 
+-ULONG FB_DLL_EXPORT LD_setup_attributes(
++extern "C" ULONG FB_DLL_EXPORT LD_setup_attributes(
+ 	const ASCII* textTypeName, const ASCII* charSetName, const ASCII* configInfo,
+ 	ULONG srcLen, const UCHAR* src, ULONG dstLen, UCHAR* dst)
+ {
+@@ -583,7 +583,7 @@ ULONG FB_DLL_EXPORT LD_setup_attributes(
+ }
+ 
+ 
+-void FB_DLL_EXPORT LD_version(USHORT* version)
++extern "C" void FB_DLL_EXPORT LD_version(USHORT* version)
+ {
+ 	// We support version 1 and 2.
+ 	if (*version != INTL_VERSION_1)
+diff --git a/src/intl/ld.h b/src/intl/ld.h
+index 5fe70e2508..a4bbd40eaa 100644
+--- a/src/intl/ld.h
++++ b/src/intl/ld.h
+@@ -55,15 +55,6 @@
+ 
+ #define UINT16	USHORT
+ 
+-#if defined(WIN_NT)
+-#define FB_DLL_EXPORT __declspec(dllexport)
+-#elif defined(DARWIN)
+-#define FB_DLL_EXPORT API_ROUTINE
+-#else
+-#define FB_DLL_EXPORT
+-#endif
+-
+-
+ /* Following this line is LD.H from Borland Language Driver Kit */
+ 
+ 
+-- 
+2.20.1
+
