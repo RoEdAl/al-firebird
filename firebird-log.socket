@@ -1,3 +1,4 @@
+# /usr/lib/systemd/system/firebird-log.socket
 [Unit]
 Description=Firebird RDMS logging FIFO
 
@@ -6,8 +7,8 @@ ListenFIFO=/var/log/firebird/firebird.log
 Symlinks=/var/log/firebird.log
 SocketUser=firebird
 SocketGroup=firebird
-SocketMode=0660
-DirectoryMode=0770
+SocketMode=0220
+DirectoryMode=0750
 RemoveOnStop=on
 PipeSize=16K
 PrivateNetwork=on

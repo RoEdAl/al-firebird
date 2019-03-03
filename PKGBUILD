@@ -4,7 +4,7 @@
 pkgname=firebird
 _pkgver=3.0.4
 pkgver=$_pkgver.33054
-pkgrel=6
+pkgrel=7
 pkgdesc="A open source SQL relational database management system (RDMS)"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h' 'aarch64')
 url="http://www.firebirdsql.org/"
@@ -46,6 +46,7 @@ source=("https://github.com/FirebirdSQL/firebird/releases/download/R${_pkgver//.
 	'firebird.service'
 	'firebird-log.socket'
 	'firebird-log.service'
+	'firebird-logging-socket.conf'
 	${_patches[@]}
 	"${_debian_patches[@]/#/${_debian_patches_url}}"
 )
@@ -54,8 +55,9 @@ md5sums=('43569120299b2db7587dcfbddab1e25a'
          'edb311947e4a51bd49426fcd3eb6b9d1'
          'e73bcb4f6a99d80fd8a1f5b31b020159'
          '34c298d809b9524174ba12d147835d65'
-         'b6568e1b2439230dc59defd8f330c2fe'
-         'c0cddd97004c1af5ce31311b5328d7ec'
+         'fb4c8b7a0366176a59434f17a37dc744'
+         '5a4211c4b58d964a91f0c03b11e01f3d'
+         'f257aea38461095daa655dea0d7a47b3'
          '09b85084a4bf8b0e44cccb5d38f1d099'
          '64b9b68f27dd1a73952625f52f5aca0c'
          'd58417c4324b0f1cc04e643a3e1a2987'
@@ -134,6 +136,7 @@ package() {
   install -Dm644 $srcdir/firebird.service $pkgdir/usr/lib/systemd/system/firebird.service
   install -Dm644 $srcdir/firebird-log.socket $pkgdir/usr/lib/systemd/system/firebird-log.socket
   install -Dm644 $srcdir/firebird-log.service $pkgdir/usr/lib/systemd/system/firebird-log.service
+  install -Dm644 $srcdir/firebird-logging-socket.conf $pkgdir/usr/lib/systemd/system/firebird.service.d/logging-socket.conf
   install -Dm644 $pkgdir/etc/firebird/I{,D}PLicense.txt -t $pkgdir/usr/share/licenses/${pkgname}
 
   # Remove unused files and dirs
