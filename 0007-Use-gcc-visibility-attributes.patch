@@ -1,4 +1,4 @@
-From ef5edea568fcd9bbbb187e03099df0696208da29 Mon Sep 17 00:00:00 2001
+From 1c356c5d41eb0bb331082c4843707895b87526ed Mon Sep 17 00:00:00 2001
 From: Edmunt Pienkowsky <roed@onet.eu>
 Date: Thu, 21 Feb 2019 15:37:36 +0100
 Subject: [PATCH 7/7] Use gcc visibility attributes
@@ -99,5 +99,5 @@ index 5fe70e2508..a4bbd40eaa 100644
  
  
 -- 
-2.20.1
+2.22.0
 

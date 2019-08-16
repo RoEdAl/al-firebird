@@ -1,4 +1,4 @@
-From 44837df798167c7133138c7d449e115b8dfef473 Mon Sep 17 00:00:00 2001
+From 2d894c1488557e1f41cba1da24aa07e718d84a3a Mon Sep 17 00:00:00 2001
 From: Edmunt Pienkowsky <roed@onet.eu>
 Date: Fri, 28 Dec 2018 21:44:29 +0000
 Subject: [PATCH 1/7] ARM build tweaks
@@ -49,5 +49,5 @@ index 43043a071a..90e5d26170 100644
 +PROD_FLAGS=$(COMMON_FLAGS) $(OPTIMIZE_FLAGS)
 +DEV_FLAGS=$(COMMON_FLAGS) $(WARN_FLAGS) $(DEBUG_CXXFLAGS)
 -- 
-2.20.1
+2.22.0
 

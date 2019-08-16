@@ -1,4 +1,4 @@
-From 8ebbaa865c1778cfbcf9449261fd529a6e0a6d1d Mon Sep 17 00:00:00 2001
+From 1d53bfbb1b2166b1111abffeafe6ddf73d5ff83e Mon Sep 17 00:00:00 2001
 From: Edmunt Pienkowsky <roed@onet.eu>
 Date: Fri, 25 Jan 2019 10:21:55 +0000
 Subject: [PATCH 6/7] gbak: honor -FE option along with -SE one
@@ -140,5 +140,5 @@ index 13ccc0025a..60c5fd1142 100644
  
  	// Returns current value of performance counter
 -- 
-2.20.1
+2.22.0
 

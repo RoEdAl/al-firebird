@@ -4,7 +4,7 @@
 pkgname=firebird
 _pkgver=3.0.4
 pkgver=$_pkgver.33054
-pkgrel=7
+pkgrel=8
 pkgdesc="A open source SQL relational database management system (RDMS)"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h' 'aarch64')
 url="http://www.firebirdsql.org/"
@@ -52,19 +52,19 @@ source=("https://github.com/FirebirdSQL/firebird/releases/download/R${_pkgver//.
 )
 
 md5sums=('43569120299b2db7587dcfbddab1e25a'
-         'edb311947e4a51bd49426fcd3eb6b9d1'
+         '38afc47e2bab01a1797bda93c11b137f'
          'e73bcb4f6a99d80fd8a1f5b31b020159'
          '34c298d809b9524174ba12d147835d65'
          'fb4c8b7a0366176a59434f17a37dc744'
          '5a4211c4b58d964a91f0c03b11e01f3d'
          'f257aea38461095daa655dea0d7a47b3'
-         '09b85084a4bf8b0e44cccb5d38f1d099'
-         '64b9b68f27dd1a73952625f52f5aca0c'
-         'd58417c4324b0f1cc04e643a3e1a2987'
-         '839b326125e004dd2f755915b567ffab'
-         '4621482eb384e4e62a5f5a5f98dc7d27'
-         'd33351312728fca890f5e66d21ba1fff'
-         'd244630e9b8c93dcafafb759ac9314a3'
+         '607d129cc8ced5cdf39c8ce775feaec1'
+         'b732af37c6b4ad364aa64f75a808a01f'
+         '49edd75f97e0fc664a88d6570cb86d0a'
+         '958d2339736040a72274169baf1fb43f'
+         'defa1022e7fadce19a51506efa126c0b'
+         '321a34e81a3ab096fe7264ac0d66d6e0'
+         '766a1094f674256dd07dc272cf6ca4e3'
          'd672c79af5d2fc86a2c2157a72e555bb'
          '2150ce29d4847a7e7ad53792bf5f2277'
          '416a28bc89ab981b7f4947422438009b'

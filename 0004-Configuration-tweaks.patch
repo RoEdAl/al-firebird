@@ -1,6 +1,6 @@
-From 49ce84716bb82287c835d1f39b477ab9ae20b159 Mon Sep 17 00:00:00 2001
+From 1d732735d0e3acb25a9800cddc7afbf1eb07528a Mon Sep 17 00:00:00 2001
 From: Edmunt Pienkowsky <roed@onet.eu>
-Date: Sat, 2 Feb 2019 09:10:39 +0000
+Date: Fri, 16 Aug 2019 12:48:39 +0200
 Subject: [PATCH 4/7] Configuration tweaks
 
 Use more secure options by default.
@@ -8,7 +8,7 @@ Use more secure options by default.
 Signed-off-by: Edmunt Pienkowsky <roed@onet.eu>
 
 diff --git a/builds/install/misc/databases.conf.in b/builds/install/misc/databases.conf.in
-index 8292777bbd..f8c0a315c0 100644
+index 8292777bbd..4bbafa1b49 100644
 --- a/builds/install/misc/databases.conf.in
 +++ b/builds/install/misc/databases.conf.in
 @@ -15,10 +15,14 @@
@@ -20,7 +20,7 @@ index 8292777bbd..f8c0a315c0 100644
  #
 -employee.fdb = $(dir_sampleDb)/employee.fdb
 -employee = $(dir_sampleDb)/employee.fdb
-+my-first = /var/lib/firebird/database/my-first.fdb
++my-first = /var/lib/firebird/data/my-first.fdb
 +{
 +	RemoteAccess = false
 +	DefaultDbCachePages = 50
@@ -52,5 +52,5 @@ index 803103d549..c048a6d9a4 100644
  
  # ----------------------------
 -- 
-2.20.1
+2.22.0
 

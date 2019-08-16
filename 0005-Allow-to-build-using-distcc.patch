@@ -1,4 +1,4 @@
-From 9bfe1ae271b97ed83f7c13aa5c6cc6ad98b1bcd2 Mon Sep 17 00:00:00 2001
+From d200c23337d0d1a640855e88e8080115d6aeb28e Mon Sep 17 00:00:00 2001
 From: Edmunt Pienkowsky <roed@onet.eu>
 Date: Tue, 1 Jan 2019 11:31:39 +0000
 Subject: [PATCH 5/7] Allow to build using distcc
@@ -34,5 +34,5 @@ index 2eb8f3833f..0e8c8efeb6 100644
  
  .SUFFIXES: .epp .e
 -- 
-2.20.1
+2.22.0
 
