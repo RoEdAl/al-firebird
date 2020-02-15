@@ -2,9 +2,9 @@
 # Based on firebird-superserver AUR package - http://aur.archlinux.org/packages/firebird-superserver
 
 pkgname=firebird
-_pkgver=3.0.4
-pkgver=$_pkgver.33054
-pkgrel=8
+_pkgver=3.0.5
+pkgver=$_pkgver.33220
+pkgrel=1
 pkgdesc="A open source SQL relational database management system (RDMS)"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h' 'aarch64')
 url="http://www.firebirdsql.org/"
@@ -27,11 +27,10 @@ _patches=(
 	'0003-Do-not-generate-employee-database.patch'
 	'0004-Configuration-tweaks.patch'
 	'0005-Allow-to-build-using-distcc.patch'
-	'0006-gbak-honor-FE-option-along-with-SE-one.patch'
 	'0007-Use-gcc-visibility-attributes.patch'
 )
 
-_debian_patches_url='http://salsa.debian.org/firebird-team/firebird3.0/raw/master/debian/patches/'
+_debian_patches_url='http://salsa.debian.org/firebird-team/firebird3.0/raw/debian/3.0.5.33220.ds4-1/debian/patches/'
 _debian_patches=(
 	'out/no-copy-from-icu.patch'
         'out/cloop-honour-build-flags.patch'
@@ -51,7 +50,7 @@ source=("https://github.com/FirebirdSQL/firebird/releases/download/R${_pkgver//.
 	"${_debian_patches[@]/#/${_debian_patches_url}}"
 )
 
-md5sums=('43569120299b2db7587dcfbddab1e25a'
+md5sums=('4844be811fd4022d68f530eac75bd5b8'
          '38afc47e2bab01a1797bda93c11b137f'
          'e73bcb4f6a99d80fd8a1f5b31b020159'
          '34c298d809b9524174ba12d147835d65'
@@ -63,13 +62,12 @@ md5sums=('43569120299b2db7587dcfbddab1e25a'
          '49edd75f97e0fc664a88d6570cb86d0a'
          '958d2339736040a72274169baf1fb43f'
          'defa1022e7fadce19a51506efa126c0b'
-         '321a34e81a3ab096fe7264ac0d66d6e0'
          '766a1094f674256dd07dc272cf6ca4e3'
-         'd672c79af5d2fc86a2c2157a72e555bb'
-         '2150ce29d4847a7e7ad53792bf5f2277'
-         '416a28bc89ab981b7f4947422438009b'
-         '24e2860a6744bea5206c4bc6679a7aa9'
-         'e48b34d83b0380d4d95161148aa699bc')
+         '78239e3c9458776b3359dd8c3425b72b'
+         '6ee4b2f066182968be35e6cbb25376bd'
+         '7c08545964fc3a7dfad1ea653c8e71d4'
+         'b60959027d02c46a3d7b1c97976ea8f7'
+         '50eacbd10f488e9a2013f06b5f230259')
 
 prepare() {
   cd $srcdir/Firebird-$pkgver-0
