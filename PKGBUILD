@@ -2,9 +2,11 @@
 # Based on firebird-superserver AUR package - http://aur.archlinux.org/packages/firebird-superserver
 
 pkgname=firebird
-_pkgver=3.0.5
-pkgver=$_pkgver.33220
+_pkgver=3.0.6
+pkgver=$_pkgver.33328
 pkgrel=1
+# _commit_epoch=$(git show -s --format=%ct)
+_commit_epoch=${SOURCE_DATE_EPOCH:-1593160229}
 pkgdesc="A open source SQL relational database management system (RDMS)"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h' 'aarch64')
 url="http://www.firebirdsql.org/"
@@ -27,10 +29,10 @@ _patches=(
 	'0003-Do-not-generate-employee-database.patch'
 	'0004-Configuration-tweaks.patch'
 	'0005-Allow-to-build-using-distcc.patch'
-	'0007-Use-gcc-visibility-attributes.patch'
+	'0006-Use-gcc-visibility-attributes.patch'
 )
 
-_debian_patches_url='http://salsa.debian.org/firebird-team/firebird3.0/raw/debian/3.0.5.33220.ds4-1/debian/patches/'
+_debian_patches_url='http://salsa.debian.org/firebird-team/firebird3.0/raw/debian/3.0.6.33328.ds4-2/debian/patches/'
 _debian_patches=(
 	'out/no-copy-from-icu.patch'
         'out/cloop-honour-build-flags.patch'
@@ -50,24 +52,24 @@ source=("https://github.com/FirebirdSQL/firebird/releases/download/R${_pkgver//.
 	"${_debian_patches[@]/#/${_debian_patches_url}}"
 )
 
-md5sums=('4844be811fd4022d68f530eac75bd5b8'
-         '38afc47e2bab01a1797bda93c11b137f'
-         'e73bcb4f6a99d80fd8a1f5b31b020159'
-         '34c298d809b9524174ba12d147835d65'
-         'fb4c8b7a0366176a59434f17a37dc744'
-         '5a4211c4b58d964a91f0c03b11e01f3d'
-         'f257aea38461095daa655dea0d7a47b3'
-         '607d129cc8ced5cdf39c8ce775feaec1'
-         'b732af37c6b4ad364aa64f75a808a01f'
-         '49edd75f97e0fc664a88d6570cb86d0a'
-         '958d2339736040a72274169baf1fb43f'
-         'defa1022e7fadce19a51506efa126c0b'
-         '766a1094f674256dd07dc272cf6ca4e3'
-         '78239e3c9458776b3359dd8c3425b72b'
-         '6ee4b2f066182968be35e6cbb25376bd'
-         '7c08545964fc3a7dfad1ea653c8e71d4'
-         'b60959027d02c46a3d7b1c97976ea8f7'
-         '50eacbd10f488e9a2013f06b5f230259')
+sha256sums=('34c1d2a29bbaf288e682cd1b5f8083f2baf73f351062245ace0bee35a3f7d35f'
+            'bff910959c2a0869105300b7964daee055bcadf3f0696ef1ce16d2c114d675e2'
+            'e2dc41a67b744b569ba68961549e0555a7dcf2cc792d4813b768007cbe029ddb'
+            '46f531bb4cae65bb607c15862b1f7826fc104fc7719d4c99380e1c2637ecb208'
+            '701bed4fce773978599c287ddcb2f98c20d3a5d26d7ec25cf931346d762e3098'
+            'aeca32ee8e52d73878764f97152ad9e842e7ebda9de7ae4b42ddac550ec60a4c'
+            '3cc3b1f898fb8e3b0f2bdd1d2dec65a5f1d5586330de29b85fb1dee809d718e8'
+            'a3ca62a00faf77b3870e2eebdac350faaa8c4137b9b5313dce499cf773ccc214'
+            'aa4e3889975326e821b8c52b1ac4645b2abb5f1574c05e2584d03d81b00d609a'
+            '18ce581582ed865823950b049e7fa9fc3ebed5610382cf63b5fd2943bb6741f3'
+            '08a9de5add96c9deee2909d4e32d2c4027dce4f4f56db334275f89833c893074'
+            'eb764c4c30a7896a9e9980d01f1b63d613030ce81e1b764b1e80ecdd9a777951'
+            'ed6061f49b5e7cb3cf120683975eef4aeb704bde032c0906250fa761466797c5'
+            'd4d38cb808a36e444528b82dd459833884c1ad9a30fdfedb70b02cd9659b1fc2'
+            '3d4c07c9a1342782e59b84c9a47a1ae90a2929a5d664c3830e8d0260ba7f0139'
+            'c2d0e714be2722315fe9350e8091e8e8feae5ef3735e914e7dbfa51303f4391a'
+            '32e49f1a3f52db9778def639fd58ef3d87db8a5591abaabc2798d85fbeef2bcb'
+            '2356f766b55412d0f3350dea4d6897e2e4ee1476e3165bd2620a22872ee23cf0')
 
 prepare() {
   cd $srcdir/Firebird-$pkgver-0
@@ -89,14 +91,16 @@ build() {
   cd $srcdir/Firebird-$pkgver-0
 
   local -r EXTRA_CFLAGS=(
-	-ffile-prefix-map=$(pwd)/=/
+	-ffile-prefix-map=$(pwd)=.
 	-fvisibility=hidden
   )
 
-  export CFLAGS="${CFLAGS} ${EXTRA_CFLAGS[@]}"
-  export CXXFLAGS="${CXXFLAGS} ${EXTRA_CFLAGS[@]} -fvisibility-inlines-hidden"
+  local -r ENV_ARGS=(
+	"CFLAGS=${CFLAGS} ${EXTRA_CFLAGS[@]}"
+	"CXXFLAGS=${CXXFLAGS} ${EXTRA_CFLAGS[@]} -fvisibility-inlines-hidden"
+  )
 
-  ./autogen.sh \
+  env "${ENV_ARGS[@]}" ./autogen.sh \
     --prefix=/usr \
     --with-fbbin=/usr/bin \
     --with-fbconf=/etc/firebird \
@@ -117,7 +121,7 @@ build() {
     --with-fbsecure-db=/var/lib/firebird/system \
     --with-system-editline
 
-  make
+   env "${ENV_ARGS[@]}" make
 }
 
 package() {
