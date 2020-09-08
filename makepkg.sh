@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-if [ -n "$(git status --porcelain ]; then 
+if [ -n "$(git status --porcelain)" ]; then 
 	echo 'There are uncommited changes'
 	exit 1
 fi
