@@ -1,4 +1,4 @@
-From ec579c88a290696832b993c7d04cd99e09ca8b2b Mon Sep 17 00:00:00 2001
+From f089c655c054ee74921417e5880a3e60208179e8 Mon Sep 17 00:00:00 2001
 From: Edmunt Pienkowsky <roed@onet.eu>
 Date: Fri, 28 Dec 2018 21:44:29 +0000
 Subject: [PATCH 1/6] ARM build tweaks
@@ -48,6 +48,3 @@ index 43043a071a..90e5d26170 100644
 -DEV_FLAGS=-ggdb -DLINUX -DARM64 -pipe -p -MMD -fPIC -Wall -fsigned-char -fmessage-length=0 -Wno-non-virtual-dtor -DFB_SEND_FLAGS=MSG_NOSIGNAL
 +PROD_FLAGS=$(COMMON_FLAGS) $(OPTIMIZE_FLAGS)
 +DEV_FLAGS=$(COMMON_FLAGS) $(WARN_FLAGS) $(DEBUG_CXXFLAGS)
--- 
-2.28.0
-

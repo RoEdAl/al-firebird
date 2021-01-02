@@ -2,11 +2,9 @@
 # Based on firebird-superserver AUR package - http://aur.archlinux.org/packages/firebird-superserver
 
 pkgname=firebird
-_pkgver=3.0.6
-pkgver=$_pkgver.33328
+_pkgver=3.0.7
+pkgver=$_pkgver.33374
 pkgrel=1
-# _commit_epoch=$(git show -s --format=%ct)
-_commit_epoch=${SOURCE_DATE_EPOCH:-1593160229}
 pkgdesc="A open source SQL relational database management system (RDMS)"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h' 'aarch64')
 url="http://www.firebirdsql.org/"
@@ -32,7 +30,7 @@ _patches=(
 	'0006-Use-gcc-visibility-attributes.patch'
 )
 
-_debian_patches_url='http://salsa.debian.org/firebird-team/firebird3.0/raw/debian/3.0.6.33328.ds4-2/debian/patches/'
+_debian_patches_url='http://salsa.debian.org/firebird-team/firebird3.0/raw/debian/3.0.7.33374.ds4-2/debian/patches/'
 _debian_patches=(
 	'out/no-copy-from-icu.patch'
         'out/cloop-honour-build-flags.patch'
@@ -52,22 +50,22 @@ source=("https://github.com/FirebirdSQL/firebird/releases/download/R${_pkgver//.
 	"${_debian_patches[@]/#/${_debian_patches_url}}"
 )
 
-sha256sums=('34c1d2a29bbaf288e682cd1b5f8083f2baf73f351062245ace0bee35a3f7d35f'
+sha256sums=('acb85cedafa10ce106b1823fb236b1b3e5d942a5741e8f8435cc8ccfec0afe76'
             'bff910959c2a0869105300b7964daee055bcadf3f0696ef1ce16d2c114d675e2'
             'e2dc41a67b744b569ba68961549e0555a7dcf2cc792d4813b768007cbe029ddb'
             '46f531bb4cae65bb607c15862b1f7826fc104fc7719d4c99380e1c2637ecb208'
             '701bed4fce773978599c287ddcb2f98c20d3a5d26d7ec25cf931346d762e3098'
             'aeca32ee8e52d73878764f97152ad9e842e7ebda9de7ae4b42ddac550ec60a4c'
             '3cc3b1f898fb8e3b0f2bdd1d2dec65a5f1d5586330de29b85fb1dee809d718e8'
-            'a3ca62a00faf77b3870e2eebdac350faaa8c4137b9b5313dce499cf773ccc214'
-            'aa4e3889975326e821b8c52b1ac4645b2abb5f1574c05e2584d03d81b00d609a'
-            '18ce581582ed865823950b049e7fa9fc3ebed5610382cf63b5fd2943bb6741f3'
-            '08a9de5add96c9deee2909d4e32d2c4027dce4f4f56db334275f89833c893074'
-            'eb764c4c30a7896a9e9980d01f1b63d613030ce81e1b764b1e80ecdd9a777951'
-            'ed6061f49b5e7cb3cf120683975eef4aeb704bde032c0906250fa761466797c5'
+            '9cecdfffaeddccf28d007ce83c9bca048266b677d26696072e989342e9896aef'
+            'bf4a75de1888bc126f61022ed32330ca0525c916303b6691b0373512569c92ed'
+            '017ab09eacd5766b97873d2b0968477b9fade22257ba88b62e55d85ec75d1f3a'
+            'f8435c1f1d511e3f982005a87cd022dd51a9c27ff63ff87fc75547a990bf8969'
+            '58f1f5ea266526717e715904a40957087ae9e8f876d5d3479db3660e537ee15b'
+            '0d8e7cdc6ebc0a937dd78dbaa82de27345db591fd39c9a7e6a3a46447c2ae7cc'
             'd4d38cb808a36e444528b82dd459833884c1ad9a30fdfedb70b02cd9659b1fc2'
             '3d4c07c9a1342782e59b84c9a47a1ae90a2929a5d664c3830e8d0260ba7f0139'
-            'c2d0e714be2722315fe9350e8091e8e8feae5ef3735e914e7dbfa51303f4391a'
+            'df685b24f3d9690683c1ffc7483b7ce089ebfc04ae3b463ee55d5132afb61683'
             '32e49f1a3f52db9778def639fd58ef3d87db8a5591abaabc2798d85fbeef2bcb'
             '2356f766b55412d0f3350dea4d6897e2e4ee1476e3165bd2620a22872ee23cf0')
 

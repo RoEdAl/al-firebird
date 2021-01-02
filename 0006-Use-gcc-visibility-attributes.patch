@@ -1,4 +1,4 @@
-From 4bbe7cfd025644ddda097d8b12d18e55339bf0e7 Mon Sep 17 00:00:00 2001
+From 487840423fc7578c247829ddfad7519a1c87f130 Mon Sep 17 00:00:00 2001
 From: Edmunt Pienkowsky <roed@onet.eu>
 Date: Thu, 21 Feb 2019 15:37:36 +0100
 Subject: [PATCH 6/6] Use gcc visibility attributes
@@ -98,6 +98,3 @@ index 5fe70e2508..a4bbd40eaa 100644
  /* Following this line is LD.H from Borland Language Driver Kit */
  
  
--- 
-2.28.0
-

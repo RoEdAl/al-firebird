@@ -1,4 +1,4 @@
-From ef1dfc71e822af62b1d2c7c12fc9edb6fbe149be Mon Sep 17 00:00:00 2001
+From bfceba814409c04d549e4e1c4b5b36e851b030ae Mon Sep 17 00:00:00 2001
 From: Edmunt Pienkowsky <roed@onet.eu>
 Date: Fri, 28 Dec 2018 21:46:33 +0000
 Subject: [PATCH 3/6] Do not generate employee database
@@ -18,6 +18,3 @@ index bf21355c74..01af635592 100644
  
  $(FINAL_EMPDB):	$(EMPLOYEE_DB)
  	$(RM) $(FINAL_EMPDB)
--- 
-2.28.0
-

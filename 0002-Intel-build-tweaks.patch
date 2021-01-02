@@ -1,4 +1,4 @@
-From 9534df7d37b4588528ee41e090bafd94c421edd5 Mon Sep 17 00:00:00 2001
+From e5d4fcf5564068e41f26ee0ced145e36525ee405 Mon Sep 17 00:00:00 2001
 From: Edmunt Pienkowsky <roed@onet.eu>
 Date: Fri, 28 Dec 2018 21:45:47 +0000
 Subject: [PATCH 2/6] Intel build tweaks
@@ -68,6 +68,3 @@ index 3d68f98d4d..495fdabe0d 100644
 -DEV_FLAGS=-ggdb -p -Wall -Wno-switch $(COMMON_FLAGS) -Wno-non-virtual-dtor
 +PROD_FLAGS=$(COMMON_FLAGS)
 +DEV_FLAGS=-p -Wall -Wno-switch $(COMMON_FLAGS) -Wno-non-virtual-dtor $(DEBUG_CXXFLAGS)
--- 
-2.28.0
-

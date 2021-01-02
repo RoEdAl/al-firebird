@@ -1,4 +1,4 @@
-From 47fe224c3032818c4e777dc3e0912cceec8870f1 Mon Sep 17 00:00:00 2001
+From 2e1eafc062ab68d1887556b1dccd1bbaeed7b24d Mon Sep 17 00:00:00 2001
 From: Edmunt Pienkowsky <roed@onet.eu>
 Date: Fri, 16 Aug 2019 12:48:39 +0200
 Subject: [PATCH 4/6] Configuration tweaks
@@ -30,7 +30,7 @@ index 8292777bbd..4bbafa1b49 100644
  #
  # Master security database specific setup.
 diff --git a/builds/install/misc/firebird.conf.in b/builds/install/misc/firebird.conf.in
-index 97c289522d..77912c558b 100644
+index 807bc2d201..26f7ec748d 100644
 --- a/builds/install/misc/firebird.conf.in
 +++ b/builds/install/misc/firebird.conf.in
 @@ -123,7 +123,7 @@
@@ -51,6 +51,3 @@ index 97c289522d..77912c558b 100644
  
  
  # ----------------------------
--- 
-2.28.0
-
