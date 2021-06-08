@@ -1,50 +1,45 @@
-From f089c655c054ee74921417e5880a3e60208179e8 Mon Sep 17 00:00:00 2001
+From ee3d50f6e8416b2a2ba2e6672e66807582d353cc Mon Sep 17 00:00:00 2001
 From: Edmunt Pienkowsky <roed@onet.eu>
-Date: Fri, 28 Dec 2018 21:44:29 +0000
-Subject: [PATCH 1/6] ARM build tweaks
+Date: Tue, 8 Jun 2021 15:05:57 +0200
+Subject: [PATCH 03/13] ARM build tweaks
 
-Signed-off-by: Edmunt Pienkowsky <roed@onet.eu>
 
 diff --git a/builds/posix/prefix.linux_arm b/builds/posix/prefix.linux_arm
-index b59d8a834c..fe2860c222 100644
+index caf34549ab..7959c68af6 100644
 --- a/builds/posix/prefix.linux_arm
 +++ b/builds/posix/prefix.linux_arm
-@@ -18,10 +18,10 @@
+@@ -18,9 +18,9 @@
  #	14 Apr 2008	Alan Barclay	alan AT escribe.co.uk
  
  
 -#LD=@CXX@
-+COMMON_FLAGS=-DFB_SEND_FLAGS=MSG_NOSIGNAL -DLINUX -DARM -MMD -fPIC -fmessage-length=0 -fno-delete-null-pointer-checks
-+CXXFLAGS+=-std=gnu++03
++COMMON_FLAGS=-DFB_SEND_FLAGS=MSG_NOSIGNAL -DLINUX -DARM -MMD -fPIC -fsigned-char -fmessage-length=0 -fno-delete-null-pointer-checks
 +OPTIMIZE_FLAGS=-fno-omit-frame-pointer
 +WARN_FLAGS=-Wall -Wno-switch -Wno-parentheses -Wno-unknown-pragmas -Wno-unused-variable -Wno-narrowing
  
--#PROD_FLAGS=-ggdb -O3 -fno-omit-frame-pointer -DLINUX -pipe -MMD -fPIC
--#DEV_FLAGS=-ggdb -DLINUX -DDEBUG_GDS_ALLOC -pipe -MMD -p -fPIC -Wall -Wno-switch
+-COMMON_FLAGS=-DLINUX -DARM -pipe -MMD -fPIC -fsigned-char -fmessage-length=0 -DFB_SEND_FLAGS=MSG_NOSIGNAL
 -
--PROD_FLAGS=-O3 -DLINUX -DARM -pipe -p -MMD -fPIC -fsigned-char -fmessage-length=0 -DFB_SEND_FLAGS=MSG_NOSIGNAL
--DEV_FLAGS=-ggdb -DLINUX -DARM -pipe -p -MMD -fPIC -Wall -fsigned-char -fmessage-length=0 -Wno-non-virtual-dtor -DFB_SEND_FLAGS=MSG_NOSIGNAL
+-PROD_FLAGS=$(COMMON_FLAGS) -O3
+-DEV_FLAGS=$(COMMON_FLAGS) -p -ggdb -Wall -Wno-non-virtual-dtor
 +PROD_FLAGS=$(COMMON_FLAGS) $(OPTIMIZE_FLAGS)
 +DEV_FLAGS=$(COMMON_FLAGS) $(WARN_FLAGS) $(DEBUG_CXXFLAGS)
 diff --git a/builds/posix/prefix.linux_arm64 b/builds/posix/prefix.linux_arm64
-index 43043a071a..90e5d26170 100644
+index a5a87550a3..3d0d621628 100644
 --- a/builds/posix/prefix.linux_arm64
 +++ b/builds/posix/prefix.linux_arm64
-@@ -17,11 +17,10 @@
- # Start of file prefix.linux:  $(VERSION)  $(PLATFORM)
+@@ -18,10 +18,9 @@
  #      14 Apr 2008     Alan Barclay    alan AT escribe.co.uk
  
+ 
+-#LD=@CXX@
 +COMMON_FLAGS=-DFB_SEND_FLAGS=MSG_NOSIGNAL -DLINUX -DARM64 -MMD -fPIC -fsigned-char -fmessage-length=0 -fno-delete-null-pointer-checks
-+CXXFLAGS+=-std=gnu++03
 +OPTIMIZE_FLAGS=-fno-omit-frame-pointer
 +WARN_FLAGS=-Wall -Wno-switch -Wno-parentheses -Wno-unknown-pragmas -Wno-unused-variable -Wno-narrowing
  
--#LD=@CXX@
--
 -#PROD_FLAGS=-ggdb -O3 -fno-omit-frame-pointer -DLINUX -pipe -MMD -fPIC
 -#DEV_FLAGS=-ggdb -DLINUX -DDEBUG_GDS_ALLOC -pipe -MMD -p -fPIC -Wall -Wno-switch
 -
--PROD_FLAGS=-O3 -DLINUX -DARM64 -pipe -p -MMD -fPIC -fsigned-char -fmessage-length=0 -DFB_SEND_FLAGS=MSG_NOSIGNAL
--DEV_FLAGS=-ggdb -DLINUX -DARM64 -pipe -p -MMD -fPIC -Wall -fsigned-char -fmessage-length=0 -Wno-non-virtual-dtor -DFB_SEND_FLAGS=MSG_NOSIGNAL
+-PROD_FLAGS=-O3 -DLINUX -DARM64 -pipe -p -MMD -fPIC -fsigned-char -fmessage-length=0
+-DEV_FLAGS=-ggdb -DLINUX -DARM64 -pipe -p -MMD -fPIC -Wall -fsigned-char -fmessage-length=0 -Wno-non-virtual-dtor
 +PROD_FLAGS=$(COMMON_FLAGS) $(OPTIMIZE_FLAGS)
 +DEV_FLAGS=$(COMMON_FLAGS) $(WARN_FLAGS) $(DEBUG_CXXFLAGS)

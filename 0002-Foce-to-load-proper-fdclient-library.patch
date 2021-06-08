@@ -1,0 +1,85 @@
+From cc7fffa1d4002f3ea868a114aba6aa54c40b7abc Mon Sep 17 00:00:00 2001
+From: Edmunt Pienkowsky <roed@onet.eu>
+Date: Wed, 9 Jun 2021 11:57:16 +0200
+Subject: [PATCH 02/13] Foce to load proper fdclient library
+
+
+diff --git a/builds/posix/Makefile.in b/builds/posix/Makefile.in
+index 1bb9f8e60a..fe31ca0b9f 100644
+--- a/builds/posix/Makefile.in
++++ b/builds/posix/Makefile.in
+@@ -417,8 +417,6 @@ SECURITY_TMP = security.tmp
+ 
+ databases:		msg.timestamp $(SECURITY_FDB)
+ 
+-export LD_LIBRARY_PATH := $(LD_LIBRARY_PATH):$(FIREBIRD)/lib
+-
+ $(SECURITY_FDB):	security.fdb
+ 	-$(RM) $@
+ 	$(CP) $^ $@
+@@ -426,18 +424,19 @@ $(SECURITY_FDB):	security.fdb
+ security.fdb:	$(SRC_ROOT)/dbs/security.sql
+ 	-$(RM) $@
+ 	-$(RM) $(SECURITY_TMP)
+-	echo create database \'$(SECURITY_TMP)\'\; | $(RUN_ISQL)
+-	$(RUN_GFIX) -write async $(SECURITY_TMP)
+-	$(RUN_ISQL) -i $^ $(SECURITY_TMP)
++	echo create database \'$(SECURITY_TMP)\'\; | env LD_LIBRARY_PATH=$(FIREBIRD)/lib LD_PRELOAD=$(FIREBIRD)/lib/libfbclient.so.2 $(RUN_ISQL) -q
++	env LD_LIBRARY_PATH=$(FIREBIRD)/lib LD_PRELOAD=$(FIREBIRD)/lib/libfbclient.so.2 $(RUN_GFIX) -write async $(SECURITY_TMP)
++	env LD_LIBRARY_PATH=$(FIREBIRD)/lib LD_PRELOAD=$(FIREBIRD)/lib/libfbclient.so.2 $(RUN_ISQL) -q -i $^ $(SECURITY_TMP)
+ 	$(CHMOD) a=rw $(SECURITY_TMP)
+ 	$(CP) $(SECURITY_TMP) $@
+-	$(RUN_GFIX) -write sync $@
++	env LD_LIBRARY_PATH=$(FIREBIRD)/lib LD_PRELOAD=$(FIREBIRD)/lib/libfbclient.so.2 $(RUN_GFIX) -write sync $@
+ 
+ msg.timestamp:	$(MSG_FILES)
+ 	-$(RM) msg.fdb
+-	echo create database \'msg.fdb\'\; | $(RUN_ISQL)
+-	$(RUN_GFIX) -write async msg.fdb
+-	for sql in $(MSG_FILES); do (echo $$sql; $(RUN_ISQL) -i $$sql msg.fdb) || exit; done
++	echo create database \'msg.fdb\'\; | env LD_LIBRARY_PATH=$(FIREBIRD)/lib LD_PRELOAD=$(FIREBIRD)/lib/libfbclient.so.2 $(RUN_ISQL) -q
++	env LD_LIBRARY_PATH=$(FIREBIRD)/lib LD_PRELOAD=$(FIREBIRD)/lib/libfbclient.so.2 $(RUN_GFIX) -write async msg.fdb
++	for sql in $(MSG_FILES); do (echo $$sql; env LD_LIBRARY_PATH=$(FIREBIRD)/lib LD_PRELOAD=$(FIREBIRD)/lib/libfbclient.so.2 $(RUN_ISQL) -q -i $$sql msg.fdb) || exit; done
++	env LD_LIBRARY_PATH=$(FIREBIRD)/lib LD_PRELOAD=$(FIREBIRD)/lib/libfbclient.so.2 $(RUN_GFIX) -write sync msg.fdb
+ 	$(TOUCH) $@
+ 
+ 
+@@ -633,7 +632,7 @@ examples: include_generic
+ message_file:	$(FIREBIRD_MSG)
+ 
+ $(FIREBIRD_MSG):	$(BUILD_FILE) msg.timestamp
+-	$(BUILD_FILE) -d msg.fdb -f $@
++	env LD_LIBRARY_PATH=$(FIREBIRD)/lib LD_PRELOAD=$(FIREBIRD)/lib/libfbclient.so.2 $(BUILD_FILE) -d msg.fdb -f $@
+ 	$(CHMOD_6) $@
+ 
+ tzdata: $(FIREBIRD)/tzdata
+diff --git a/builds/posix/make.rules b/builds/posix/make.rules
+index 3afd891141..1e7049be3c 100644
+--- a/builds/posix/make.rules
++++ b/builds/posix/make.rules
+@@ -80,20 +80,20 @@ OBJECT_GPRE_FLAGS = -m -z -n -ocxx
+ .SUFFIXES: .c .e .epp .cpp
+ 
+ .e.c:
+-	$(GPRE_CURRENT) $(GPRE_FLAGS) $< $@
++	env LD_LIBRARY_PATH=$(FIREBIRD)/lib LD_PRELOAD=$(FIREBIRD)/lib/libfbclient.so.2 $(GPRE_CURRENT) $(GPRE_FLAGS) $< $@
+ 
+ 
+ $(OBJ)/jrd/%.cpp: $(SRC_ROOT)/jrd/%.epp
+-	$(GPRE_CURRENT) $(JRD_GPRE_FLAGS) $(firstword $<) $@
++	env LD_LIBRARY_PATH=$(FIREBIRD)/lib LD_PRELOAD=$(FIREBIRD)/lib/libfbclient.so.2 $(GPRE_CURRENT) $(JRD_GPRE_FLAGS) $(firstword $<) $@
+ 
+ $(OBJ)/isql/%.cpp: $(SRC_ROOT)/isql/%.epp
+-	$(GPRE_CURRENT) $(OBJECT_GPRE_FLAGS) $< $@
++	env LD_LIBRARY_PATH=$(FIREBIRD)/lib LD_PRELOAD=$(FIREBIRD)/lib/libfbclient.so.2 $(GPRE_CURRENT) $(OBJECT_GPRE_FLAGS) $< $@
+ 
+ $(OBJ)/burp/%.cpp: $(SRC_ROOT)/burp/%.epp
+-	$(GPRE_CURRENT) $(OBJECT_GPRE_FLAGS) $< $@
++	env LD_LIBRARY_PATH=$(FIREBIRD)/lib LD_PRELOAD=$(FIREBIRD)/lib/libfbclient.so.2 $(GPRE_CURRENT) $(OBJECT_GPRE_FLAGS) $< $@
+ 
+ $(OBJ)/%.cpp: $(SRC_ROOT)/%.epp
+-	$(GPRE_CURRENT) $(GPRE_FLAGS) $(firstword $<) $@
++	env LD_LIBRARY_PATH=$(FIREBIRD)/lib LD_PRELOAD=$(FIREBIRD)/lib/libfbclient.so.2 $(GPRE_CURRENT) $(GPRE_FLAGS) $(firstword $<) $@
+ 
+ 
+ .SUFFIXES: .lo .o .cpp .c .cc

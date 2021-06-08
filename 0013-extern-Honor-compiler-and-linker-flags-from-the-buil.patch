@@ -1,0 +1,83 @@
+From 5a5a1895f802bee5fc8623456476438ac78eedd8 Mon Sep 17 00:00:00 2001
+From: Edmunt Pienkowsky <roed@onet.eu>
+Date: Wed, 9 Jun 2021 16:37:23 +0200
+Subject: [PATCH 13/13] extern: Honor compiler and linker flags from the build
+ system
+
+
+diff --git a/builds/posix/Makefile.in b/builds/posix/Makefile.in
+index 308b4486c4..eaf7bb0685 100644
+--- a/builds/posix/Makefile.in
++++ b/builds/posix/Makefile.in
+@@ -170,11 +170,11 @@ external:
+ 	$(MAKE) -C $(ROOT)/extern/decNumber
+ 	ln -sf $(ROOT)/extern/decNumber/libdecFloat.a $(LIB)
+ 
+-	CXXFLAGS="-O3 -g -fPIC" $(MAKE) -C $(ROOT)/extern/re2
++	CXXFLAGS="$(WCXXFLAGS)" $(MAKE) -C $(ROOT)/extern/re2
+ 	ln -sf $(ROOT)/extern/re2/obj/libre2.a $(LIB)
+ 
+ ifeq ($(TOMMATH_BUILD_FLG),Y)
+-	CFLAGS="$(CFLAGS)" $(MAKE) -C $(ROOT)/extern/libtommath -f makefile.shared GCC=$(GCC)
++	CFLAGS="$(WCFLAGS)" $(MAKE) -C $(ROOT)/extern/libtommath -f makefile.shared GCC=$(GCC)
+ 
+ ifeq ($(PLATFORM),DARWIN)
+ 	install_name_tool -id "@rpath/lib/libtommath.dylib" $(TOMMATH)/.libs/libtommath.0.dylib
+diff --git a/extern/btyacc/Makefile b/extern/btyacc/Makefile
+index f43296526b..1bfc3db8f9 100644
+--- a/extern/btyacc/Makefile
++++ b/extern/btyacc/Makefile
+@@ -12,7 +12,7 @@ HDRS	      = defs.h mstring.h
+ # across all of our supported compilers/platforms.
+ 
+ # Vanilla CFLAGS
+-CFLAGS=
++# CFLAGS=
+ 
+ # No LDFLAGS
+ #LDFLAGS=
+diff --git a/extern/cloop/Makefile b/extern/cloop/Makefile
+index 1573dc22a5..c35f475ecd 100644
+--- a/extern/cloop/Makefile
++++ b/extern/cloop/Makefile
+@@ -38,10 +38,6 @@ else
+ 	DL_LIB := -ldl
+ endif
+ 
+-ifeq ($(TARGET),release)
+-	CXX_FLAGS += -O3
+-endif
+-
+ ifeq ($(shell uname),Darwin)
+ CXX_FLAGS += -stdlib=libc++
+ endif
+diff --git a/extern/decNumber/Makefile b/extern/decNumber/Makefile
+index 253e34c180..25a58eef88 100644
+--- a/extern/decNumber/Makefile
++++ b/extern/decNumber/Makefile
+@@ -2,7 +2,7 @@ LIBRARY=libdecFloat$(CROSS).a
+ 
+ $(LIBRARY):		$(wildcard *.c) $(wildcard *.h) Makefile
+ 	$(RM) -f *.o
+-	$(CC) $(CROSS_FLAGS) -c -O3 -fPIC $(subst decCommon.c,,$(subst decBasic.c,,$(wildcard *.c)))
++	$(CC) $(CROSS_FLAGS) -c $(WCPPFLAGS) $(subst decCommon.c,,$(subst decBasic.c,,$(wildcard *.c)))
+ 	$(AR) crs $(LIBRARY) *.o
+ 	$(RM) -f *.o
+ 
+diff --git a/extern/re2/Makefile b/extern/re2/Makefile
+index f001f0640c..351631231f 100644
+--- a/extern/re2/Makefile
++++ b/extern/re2/Makefile
+@@ -13,11 +13,8 @@
+ # LDPCRE=-L/usr/local/lib -lpcre
+ 
+ CXX?=g++
+-# can override
+-CXXFLAGS?=-O3 -g
+-LDFLAGS?=
+ # required
+-RE2_CXXFLAGS?=-std=c++11 -pthread -Wall -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -I. $(CCICU) $(CCPCRE)
++RE2_CXXFLAGS?=-Wall -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -I. $(CCICU) $(CCPCRE)
+ RE2_LDFLAGS?=-pthread $(LDICU) $(LDPCRE)
+ AR?=ar
+ ARFLAGS?=rsc

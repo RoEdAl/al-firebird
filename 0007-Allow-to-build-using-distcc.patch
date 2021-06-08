@@ -1,20 +1,23 @@
-From 5c5ac6187b7ec851ee0348c6a192fb4a2e52842c Mon Sep 17 00:00:00 2001
+From 2f4c6a252de586ca9234e6e63cb34d957743b48c Mon Sep 17 00:00:00 2001
 From: Edmunt Pienkowsky <roed@onet.eu>
-Date: Tue, 1 Jan 2019 11:31:39 +0000
-Subject: [PATCH 5/6] Allow to build using distcc
+Date: Tue, 8 Jun 2021 13:21:21 +0200
+Subject: [PATCH 07/13] Allow to build using distcc
 
-Signed-off-by: Edmunt Pienkowsky <roed@onet.eu>
 
 diff --git a/builds/posix/make.rules b/builds/posix/make.rules
-index 2eb8f3833f..0e8c8efeb6 100644
+index 1e7049be3c..d38394bc44 100644
 --- a/builds/posix/make.rules
 +++ b/builds/posix/make.rules
-@@ -91,19 +91,19 @@ $(OBJ)/%.cpp: $(SRC_ROOT)/%.epp
+@@ -105,7 +105,7 @@ $(OBJ)/%.cpp: $(SRC_ROOT)/%.epp
  	$(CC) $(WCFLAGS) -c $(firstword $<) -o $@
  
  $(OBJ)/%.o: $(SRC_ROOT)/%.c
 -	$(CC) $(WCFLAGS) -c $(firstword $<) -o $@
 +	$(CC) $(WCFLAGS) -MF $(@:.o=.d) -c $(firstword $<) -o $@
+ 	@sed $(INLINE_EDIT_SED) -e "1,2s/:/: \$$(wildcard/" -e "\$$s/\(.*\)/\\1)/" $(patsubst %.o,%.d,$@)
+ 
+ $(OBJ)/%.o: $(SRC_ROOT)/%.m
+@@ -113,15 +113,15 @@ $(OBJ)/%.o: $(SRC_ROOT)/%.m
  	@sed $(INLINE_EDIT_SED) -e "1,2s/:/: \$$(wildcard/" -e "\$$s/\(.*\)/\\1)/" $(patsubst %.o,%.d,$@)
  
  $(OBJ)/%.o: $(OBJ)/%.cpp

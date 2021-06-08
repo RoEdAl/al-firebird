@@ -1,0 +1,19 @@
+From cfdcdec3b0ed00778c21f88a62414b839eddd677 Mon Sep 17 00:00:00 2001
+From: Edmunt Pienkowsky <roed@onet.eu>
+Date: Tue, 8 Jun 2021 13:14:00 +0200
+Subject: [PATCH 05/13] Do not generate employee database
+
+
+diff --git a/builds/posix/Makefile.in.examples b/builds/posix/Makefile.in.examples
+index 8fb0b9e841..d6b5d06ecc 100644
+--- a/builds/posix/Makefile.in.examples
++++ b/builds/posix/Makefile.in.examples
+@@ -89,7 +89,7 @@ EXTAUTH_PLUGIN=	$(EXAMPLES_FB)/prebuilt/libfbSampleExtAuth.$(SHRLIB_EXT)
+ all: examples
+ 
+ # examples: $(EMPLOYEE_DB) $(INTLEMP_DB) $(EXAMPLES_FB)/README
+-examples:	$(FINAL_EMPDB) $(EXAMPLES_FB)/README $(EXTAUTH_PLUGIN)
++examples:	$(EXAMPLES_FB)/README $(EXTAUTH_PLUGIN)
+ 
+ $(EXTAUTH_PLUGIN):	$(EXAMPLES_FB)/extauth/Makefile
+ 	$(MAKE) -C $(EXAMPLES_FB)/extauth OUT=$(EXAMPLES_FB)/prebuilt INTERMED=$(TMP_ROOT)/examples/extauth

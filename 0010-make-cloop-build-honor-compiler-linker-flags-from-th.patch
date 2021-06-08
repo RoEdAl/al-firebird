@@ -1,0 +1,32 @@
+From 4be5a40405c21817e6e70f877a9fea60eda7c9c3 Mon Sep 17 00:00:00 2001
+From: Edmunt Pienkowsky <roed@onet.eu>
+Date: Tue, 8 Jun 2021 13:35:45 +0200
+Subject: [PATCH 10/13] make cloop build honor compiler/linker flags from the
+ environment
+
+
+diff --git a/extern/cloop/Makefile b/extern/cloop/Makefile
+index 08516c27cd..1573dc22a5 100644
+--- a/extern/cloop/Makefile
++++ b/extern/cloop/Makefile
+@@ -6,7 +6,7 @@ TARGET	:= release
+ 
+ CC	:= $(CC)
+ CXX	:= $(CXX)
+-LD	:= $(CXX)
++LD	:= $(CXX) $(LDFLAGS)
+ 
+ SRC_DIR		:= src
+ BUILD_DIR	:= build
+@@ -27,8 +27,9 @@ SRCS_CPP := $(foreach sdir,$(SRC_DIRS),$(wildcard $(sdir)/*.cpp))
+ OBJS_C := $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRCS_C))
+ OBJS_CPP := $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(SRCS_CPP))
+ 
+-C_FLAGS := -ggdb -fPIC -MMD -MP -W -Wall -Wno-unused-parameter
+-CXX_FLAGS := $(C_FLAGS)
++COMMON_C_FLAGS := -ggdb -fPIC -MMD -MP -W -Wall -Wno-unused-parameter
++C_FLAGS := $(COMMON_C_FLAGS) $(CFLAGS) $(CPPFLAGS)
++CXX_FLAGS := $(COMMON_C_FLAGS) $(CXXFLAGS) $(CPPFLAGS)
+ FPC_FLAGS := -Mdelphi
+ 
+ ifeq ($(shell uname),FreeBSD)

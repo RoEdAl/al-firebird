@@ -1,0 +1,19 @@
+From 880956b49089550b81c223fe1438bc749947e69e Mon Sep 17 00:00:00 2001
+From: Edmunt Pienkowsky <roed@onet.eu>
+Date: Tue, 8 Jun 2021 13:49:02 +0200
+Subject: [PATCH 11/13] spelling error
+
+
+diff --git a/src/remote/client/interface.cpp b/src/remote/client/interface.cpp
+index fc5fda7952..c3703f5ece 100644
+--- a/src/remote/client/interface.cpp
++++ b/src/remote/client/interface.cpp
+@@ -1957,7 +1957,7 @@ void Attachment::freeClientData(CheckStatusWrapper* status, bool force)
+ 
+ 		if (status->getState() & Firebird::IStatus::STATE_ERRORS)
+ 		{
+-			iscLogStatus("REMOTE INTERFACE/gds__detach: Unsuccesful detach from "
++			iscLogStatus("REMOTE INTERFACE/gds__detach: Unsuccessful detach from "
+ 					"database.\n\tUncommitted work may have been lost.", status);
+ 			reset(status);
+ 		}

@@ -1,17 +1,37 @@
-From 487840423fc7578c247829ddfad7519a1c87f130 Mon Sep 17 00:00:00 2001
+From 31f4f2f435b72c46c34d8970eb09e5c3a0e93254 Mon Sep 17 00:00:00 2001
 From: Edmunt Pienkowsky <roed@onet.eu>
-Date: Thu, 21 Feb 2019 15:37:36 +0100
-Subject: [PATCH 6/6] Use gcc visibility attributes
+Date: Tue, 8 Jun 2021 13:26:56 +0200
+Subject: [PATCH 08/13] Use gcc visibility attributes
 
 Ability to compile sources with -fvisibility=hidden and -fvisibility-inlines-hidden flags.
 
-Signed-off-by: Edmunt Pienkowsky <roed@onet.eu>
-
+diff --git a/builds/install/misc/databases.conf b/builds/install/misc/databases.conf
+index cc5b62de8a..86c865eb0d 100644
+--- a/builds/install/misc/databases.conf
++++ b/builds/install/misc/databases.conf
+@@ -15,10 +15,14 @@
+ #
+ 
+ #
+-# Example Database:
++# Your first database:
+ #
+-employee.fdb = $(dir_sampleDb)/employee.fdb
+-employee = $(dir_sampleDb)/employee.fdb
++my-first = /var/lib/firebird/data/my-first.fdb
++{
++	RemoteAccess = false
++	DefaultDbCachePages = 50
++	SecurityDatabase = my-first
++}
+ 
+ #
+ # Master security database specific setup.
 diff --git a/src/common/common.h b/src/common/common.h
-index 58abaaf695..3e0b49e121 100644
+index 9fbe95410a..efd87cd4c2 100644
 --- a/src/common/common.h
 +++ b/src/common/common.h
-@@ -199,6 +199,13 @@
+@@ -207,6 +207,13 @@
  #define FB_CPU CpuM68k
  #endif /* M68K */
  
@@ -26,7 +46,7 @@ index 58abaaf695..3e0b49e121 100644
  
  
 diff --git a/src/include/firebird.h b/src/include/firebird.h
-index 87f0a110f8..b85dd24366 100644
+index 1bd7f2d4b3..99845779c3 100644
 --- a/src/include/firebird.h
 +++ b/src/include/firebird.h
 @@ -47,6 +47,8 @@
@@ -39,7 +59,7 @@ index 87f0a110f8..b85dd24366 100644
  #define FB_DLL_EXPORT
  #endif
 diff --git a/src/intl/ld.cpp b/src/intl/ld.cpp
-index cf2e90fbcd..6f013abbc4 100644
+index 1056921ee3..c22081beed 100644
 --- a/src/intl/ld.cpp
 +++ b/src/intl/ld.cpp
 @@ -468,7 +468,7 @@ struct
@@ -79,7 +99,7 @@ index cf2e90fbcd..6f013abbc4 100644
  	// We support version 1 and 2.
  	if (*version != INTL_VERSION_1)
 diff --git a/src/intl/ld.h b/src/intl/ld.h
-index 5fe70e2508..a4bbd40eaa 100644
+index 0ee001f733..8020254d2d 100644
 --- a/src/intl/ld.h
 +++ b/src/intl/ld.h
 @@ -55,15 +55,6 @@

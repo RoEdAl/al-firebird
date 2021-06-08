@@ -1,0 +1,19 @@
+From a3d6edbd58ecc00d63eb7bd2b50fa8bf272c8ce6 Mon Sep 17 00:00:00 2001
+From: Edmunt Pienkowsky <roed@onet.eu>
+Date: Tue, 8 Jun 2021 13:17:58 +0200
+Subject: [PATCH 06/13] Configuration tweaks
+
+
+diff --git a/builds/install/misc/firebird.conf b/builds/install/misc/firebird.conf
+index b7cd8d7472..9a21acb733 100644
+--- a/builds/install/misc/firebird.conf
++++ b/builds/install/misc/firebird.conf
+@@ -123,7 +123,7 @@
+ #
+ # Type: string (special format)
+ #
+-#DatabaseAccess = Full
++DatabaseAccess = None
+ 
+ 
+ # ----------------------------
