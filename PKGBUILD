@@ -141,7 +141,7 @@ package() {
   mkdir $pkgdir/usr/share/factory
   mv $pkgdir/var $pkgdir/usr/share/factory
   rm -rf $pkgdir/run
-  rm -rf $pkgdir/usr/include/firebird/impl
+  rm -rf $pkgdir/usr/include/firebird/impl/boost
 
   mv $pkgdir/usr/bin/isql{,-fb}
   mv $pkgdir/etc/firebird/README.md $pkgdir/usr/share/doc/firebird
