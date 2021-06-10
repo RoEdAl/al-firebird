@@ -1,6 +1,6 @@
-From 5a5a1895f802bee5fc8623456476438ac78eedd8 Mon Sep 17 00:00:00 2001
+From 3966c6c823d119b2567a69cf5f5aea3ffd277bc6 Mon Sep 17 00:00:00 2001
 From: Edmunt Pienkowsky <roed@onet.eu>
-Date: Wed, 9 Jun 2021 16:37:23 +0200
+Date: Thu, 10 Jun 2021 09:38:07 +0200
 Subject: [PATCH 13/13] extern: Honor compiler and linker flags from the build
  system
 
@@ -64,6 +64,19 @@ index 253e34c180..25a58eef88 100644
  	$(AR) crs $(LIBRARY) *.o
  	$(RM) -f *.o
  
+diff --git a/extern/libtomcrypt/makefile_include.mk b/extern/libtomcrypt/makefile_include.mk
+index a48eefe9cc..4f783a3dea 100644
+--- a/extern/libtomcrypt/makefile_include.mk
++++ b/extern/libtomcrypt/makefile_include.mk
+@@ -112,7 +112,7 @@ else
+ 
+ ifndef IGNORE_SPEED
+ # optimize for SPEED
+-LTC_CFLAGS += -O3 -funroll-loops
++LTC_CFLAGS += -funroll-loops
+ 
+ # add -fomit-frame-pointer.  hinders debugging!
+ LTC_CFLAGS += -fomit-frame-pointer
 diff --git a/extern/re2/Makefile b/extern/re2/Makefile
 index f001f0640c..351631231f 100644
 --- a/extern/re2/Makefile
