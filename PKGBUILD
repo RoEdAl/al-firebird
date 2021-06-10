@@ -10,6 +10,7 @@ arch=('i686' 'x86_64' 'armv6h' 'armv7h' 'aarch64')
 url="http://www.firebirdsql.org/"
 license=('custom:IPL' 'custom:IDPL')
 depends=('icu' 'libedit' 'libtommath' 'libatomic_ops')
+optdepends=('boost-libs')
 makedepends=('boost' 'unzip')
 provides=("libfbclient=$pkgver")
 conflicts=('firebird-superserver' 'firebird-classicserver' 'libfbclient')
@@ -18,6 +19,7 @@ backup=(
     'etc/firebird/fbtrace.conf'
     'etc/firebird/databases.conf'
     'etc/firebird/plugins.conf'
+    'etc/firebird/replication.conf'
     'usr/lib/firebird/plugins/udr_engine.conf'
     'usr/lib/firebird/intl/fbintl.conf')
 
@@ -142,6 +144,8 @@ package() {
   rm -rf $pkgdir/usr/include/firebird/impl
 
   mv $pkgdir/usr/bin/isql{,-fb}
+  mv $pkgdir/etc/firebird/README.md $pkgdir/usr/share/doc/firebird
+  mv $pkgdir/etc/firebird/CHANGELOG.md $pkgdir/usr/share/doc/firebird
 
   chmod -R ugo-w $pkgdir/usr/share/doc/firebird
 }
